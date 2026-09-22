@@ -1,0 +1,6 @@
+// 文渊字体：https://github.com/takushun-wu/WenYuanFonts
+$base-font-family: "WenYuan Sans SC Flex VF", "WenYuan Sans SC VF", "WenYuan Sans SC", "Source Han Sans SC", "Noto Sans SC", sans-serif, "Plangothic P1", "Plangothic P2";
+
+// FineMono为本人自制字体，衍生自Iosevka，未来可能会发布
+// 优先使用字符宽度为1/2em的字体，以便与汉字对齐，很多常见等宽字体的字符宽度不是1/2em
+$code-font-family: "FineMono", "Iosevka", "Ubuntu Mono", monospace, $base-font-family;
