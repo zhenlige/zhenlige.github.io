@@ -1,0 +1,10 @@
+exclude:
+-   README.md
+
+timezone: Asia/Shanghai
+language: zh-CN
+
+theme: minima
+author: 真理哥
+title: 真理哥的博客
+description: 个人博客/技术/geek/数学/计算机
