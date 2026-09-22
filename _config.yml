@@ -1,6 +1,9 @@
 exclude:
 -   README.md
 
+disqus:
+    shortname: zhenlige # 占位符，实际使用giscus评论系统
+
 timezone: Asia/Shanghai
 language: zh-CN
 
