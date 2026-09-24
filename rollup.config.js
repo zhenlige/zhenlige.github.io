@@ -5,18 +5,8 @@ export default [
         input: 'src/codemirror.mjs',
         output: {
             dir: 'assets',
-            name: 'CodeMirror',
-            format: 'iife',
+            format: 'es',
         },
         plugins: [nodeResolve()],
     },
-    {
-        input: 'src/lang_js.mjs',
-        output: {
-            dir: 'assets',
-            name: '{CodeMirror, javascript}',
-            format: 'iife',
-        },
-        plugins: [nodeResolve()],
-    }
 ];

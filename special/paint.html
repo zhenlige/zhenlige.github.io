@@ -1,5 +1,6 @@
 ---
 title: 程序画图工具
+layout: default
 ---
 
 <canvas id="canvas" class="autosize" width="300" height="150" style="display: block; border: 1px solid #000;"></canvas>
@@ -19,9 +20,8 @@ title: 程序画图工具
 </div>
 <div id="editor" style="height: 300px; border: 1px solid #000;"></div>
 <script src="/assets/autosize.js"></script>
-<script src="/assets/codemirror.js"></script>
-<script src="/assets/lang_js.js"></script>
-<script>
+<script type="module">
+	import {CodeMirror, javascript} from "/assets/codemirror.js";
 	const canvas = document.getElementById("canvas");
 	const widthInput = document.getElementById("width");
 	const heightInput = document.getElementById("height");
