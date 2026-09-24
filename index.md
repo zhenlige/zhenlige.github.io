@@ -1,5 +1,6 @@
 ---
 title: 主页
+layout: home
 ---
 
 这里是博客的主页。
