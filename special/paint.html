@@ -14,7 +14,7 @@ layout: default
 	图片格式：<select id="imageFormat">
 		<option value="image/bmp">BMP</option>
 		<option value="image/jpeg">JPEG</option>
-		<option value="image/png">PNG</option>
+		<option value="image/png" selected>PNG</option>
 		<option value="image/webp">WebP</option>
 	</select>
 </div>
@@ -32,9 +32,15 @@ ctx：画布上下文对象
 </div>
 <script src="/assets/autosize.js"></script>
 <script src="/assets/math.js"></script>
+<script>
+	const canvas = document.getElementById("canvas");
+	const ctx = canvas.getContext("2d");
+
+	let width, height;
+</script>
 <script type="module">
 	import {EditorView, setup} from "/assets/codemirror.js";
-	const canvas = document.getElementById("canvas");
+
 	const widthInput = document.getElementById("width");
 	const heightInput = document.getElementById("height");
 	const drawButton = document.getElementById("drawButton");
@@ -92,11 +98,10 @@ ctx：画布上下文对象
 	});
 
 	drawButton.addEventListener("click", () => {
-		const width = parseInt(widthInput.value, 10);
-		const height = parseInt(heightInput.value, 10);
+		width = parseInt(widthInput.value, 10);
+		height = parseInt(heightInput.value, 10);
 		canvas.width = width;
 		canvas.height = height;
-		const ctx = canvas.getContext("2d");
 		ctx.reset();
 
 		const code = editor.state.doc.toString();
