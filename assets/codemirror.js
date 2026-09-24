@@ -25956,7 +25956,7 @@ you take this package's source (which is just a bunch of imports
 and an array literal), copy it into your own code, and adjust it
 as desired.
 */
-const basicSetup$1 = /*@__PURE__*/(() => [
+const basicSetup = /*@__PURE__*/(() => [
     lineNumbers(),
     highlightActiveLineGutter(),
     highlightSpecialChars(),
@@ -28404,4 +28404,4 @@ const setup = [
 	javascript(),
 ];
 
-export { EditorView, basicSetup$1 as basicSetup, setup };
+export { EditorView, setup };
