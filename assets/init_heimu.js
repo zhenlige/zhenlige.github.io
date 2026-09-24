@@ -1,16 +1,15 @@
 class HeimuElement extends HTMLElement {}
 
-customElements.define('heimu', HeimuElement);
+customElements.define('hei-mu', HeimuElement);
 
 const heimuStyle = document.createElement('style');
 heimuStyle.textContent = `
-	heimu {
+	hei-mu {
 		background-color: currentColor;
 	}
 
-	heimu:hover {
-		text-decoration: line-through color-mix(in srgb, currentColor 50%, transparent 50%);
-		background-color: transparent;
+	hei-mu:hover {
+		background-color: color-mix(in srgb, currentColor 20%, transparent 80%);
 	}
 `;
 document.head.appendChild(heimuStyle);

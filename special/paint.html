@@ -56,7 +56,7 @@ ctx：画布上下文对象
 		extensions: setup,
 	});
 
-	function textLog(message) {
+	globalThis.textLog = (message) => {
 		textOutput.textContent += message + "\n";
 		textOutput.scrollTop = textOutput.scrollHeight;
 	}

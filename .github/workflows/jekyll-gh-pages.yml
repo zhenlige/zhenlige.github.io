@@ -1,8 +1,6 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
-
 on:
-        # Runs on pushes targeting the default branch
+    # Runs on pushes targeting the default branch
     push:
         branches: ["main"]
 
@@ -30,35 +28,18 @@ jobs:
             uses: actions/checkout@v7
             # with:
             #     fetch-depth: 0 # Shallow clones should be disabled for a better experience with the Jekyll build action
+        -   name: Setup Ruby
+            uses: ruby/setup-ruby@v1
+            with:
+                bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+                cache-version: 0 # Increment this number if you need to re-download cached gems
         -   name: Setup Pages
             uses: actions/configure-pages@v6
-        # -   name: Debug - List repository files
-        #     run: |
-        #         echo "=== 仓库根目录文件 ==="
-        #         ls -la
-        #         echo ""
-        #         echo "=== _includes 目录 ==="
-        #         ls -la _includes/ 2>&1 || echo "_includes/ 不存在"
-        #         echo ""
-        #         echo "=== _layouts 目录 ==="
-        #         ls -la _layouts/ 2>&1 || echo "_layouts/ 不存在"
-        #         echo ""
-        #         echo "=== _sass 目录 ==="
-        #         ls -la _sass/ 2>&1 || echo "_sass/ 不存在"
-        #         echo ""
-        #         echo "=== assets 目录 ==="
-        #         find assets/ -type f 2>&1 || echo "assets/ 不存在"
-        #         echo ""
-        #         echo "=== _config.yml 内容 ==="
-        #         cat _config.yml
-        #         echo ""
-        #         echo "=== 所有文件和目录 ==="
-        #         find . -maxdepth 3 -not -path './.git/*' -not -path './_site/*' | sort
         -   name: Build with Jekyll
-            uses: actions/jekyll-build-pages@v1
-            with:
-                source: ./
-                destination: ./_site
+            # Outputs to the './_site' directory by default
+            run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+            env:
+                JEKYLL_ENV: production
         -   name: Upload artifact
             uses: actions/upload-pages-artifact@v5
 
