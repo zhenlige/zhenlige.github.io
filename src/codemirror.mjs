@@ -1,12 +1,12 @@
-export {EditorView} from "@codemirror/view";
+export {EditorView, keymap} from "@codemirror/view";
 import {basicSetup} from "codemirror";
 import {javascript} from "@codemirror/lang-javascript";
 import {indentUnit} from "@codemirror/language";
 import {indentWithTab} from "@codemirror/commands";
 
 export const setup = [
-	indentUnit.of("\t"),
-	indentWithTab,
 	basicSetup,
 	javascript(),
+	indentUnit.of("\t"),
+	keymap.of(indentWithTab),
 ];
