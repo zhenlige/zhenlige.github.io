@@ -22103,6 +22103,13 @@ const defaultKeymap = /*@__PURE__*/[
     { key: "Alt-A", mac: "Ctrl-A", run: toggleBlockComment },
     { key: "Ctrl-m", mac: "Shift-Alt-m", run: toggleTabFocusMode },
 ].concat(standardKeymap);
+/**
+A binding that binds Tab to [`indentMore`](https://codemirror.net/6/docs/ref/#commands.indentMore) and
+Shift-Tab to [`indentLess`](https://codemirror.net/6/docs/ref/#commands.indentLess).
+Please see the [Tab example](../../examples/tab/) before using
+this.
+*/
+const indentWithTab = { key: "Tab", run: indentMore, shift: indentLess };
 
 const basicNormalize = typeof String.prototype.normalize == "function"
     ? x => x.normalize("NFKD") : x => x;
@@ -25949,7 +25956,7 @@ you take this package's source (which is just a bunch of imports
 and an array literal), copy it into your own code, and adjust it
 as desired.
 */
-const basicSetup = /*@__PURE__*/(() => [
+const basicSetup$1 = /*@__PURE__*/(() => [
     lineNumbers(),
     highlightActiveLineGutter(),
     highlightSpecialChars(),
@@ -25977,31 +25984,6 @@ const basicSetup = /*@__PURE__*/(() => [
         ...lintKeymap
     ])
 ])();
-/**
-A minimal set of extensions to create a functional editor. Only
-includes [the default keymap](https://codemirror.net/6/docs/ref/#commands.defaultKeymap), [undo
-history](https://codemirror.net/6/docs/ref/#commands.history), [special character
-highlighting](https://codemirror.net/6/docs/ref/#view.highlightSpecialChars), [custom selection
-drawing](https://codemirror.net/6/docs/ref/#view.drawSelection), and [default highlight
-style](https://codemirror.net/6/docs/ref/#language.defaultHighlightStyle).
-*/
-const minimalSetup = /*@__PURE__*/(() => [
-    highlightSpecialChars(),
-    history(),
-    drawSelection(),
-    syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-    keymap.of([
-        ...defaultKeymap,
-        ...historyKeymap,
-    ])
-])();
-
-var index = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  EditorView: EditorView,
-  basicSetup: basicSetup,
-  minimalSetup: minimalSetup
-});
 
 /**
 A parse stack. These are used internally by the parser to track
@@ -28415,4 +28397,11 @@ const autoCloseTags = /*@__PURE__*/EditorView.inputHandler.of((view, from, to, t
     return true;
 });
 
-export { index as CodeMirror, javascript };
+const setup = [
+	indentUnit.of("\t"),
+	indentWithTab,
+	basicSetup,
+	javascript(),
+];
+
+export { EditorView, basicSetup$1 as basicSetup, setup };
