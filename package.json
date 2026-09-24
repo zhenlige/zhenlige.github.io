@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "codemirror": "^6.0.2"
+  }
+}

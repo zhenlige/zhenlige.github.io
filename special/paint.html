@@ -1,0 +1,127 @@
+---
+title: 程序画图工具
+---
+
+<canvas id="canvas" class="autosize" width="300" height="150" style="display: block; border: 1px solid #000;"></canvas>
+<div>
+	<label for="width">宽度：</label><input type="number" id="width" value="300">
+	<label for="height">高度：</label><input type="number" id="height" value="150">
+	<button type="button" id="drawButton">运行</button>
+	<button type="button" id="openButton">打开程序文件</button>
+	<button type="button" id="saveButton">保存程序文件</button>
+	<button type="button" id="saveImageButton">保存图片</button>
+	图片格式：<select id="imageFormat">
+		<option value="image/bmp">BMP</option>
+		<option value="image/jpeg">JPEG</option>
+		<option value="image/png">PNG</option>
+		<option value="image/webp">WebP</option>
+	</select>
+</div>
+<div id="editor" style="height: 300px; border: 1px solid #000;"></div>
+<script src="/assets/autosize.js"></script>
+<script src="/assets/codemirror.js"></script>
+<script src="/assets/lang_js.js"></script>
+<script>
+	const canvas = document.getElementById("canvas");
+	const widthInput = document.getElementById("width");
+	const heightInput = document.getElementById("height");
+	const drawButton = document.getElementById("drawButton");
+	const openButton = document.getElementById("openButton");
+	const saveButton = document.getElementById("saveButton");
+	const saveImageButton = document.getElementById("saveImageButton");
+	const imageFormatSelect = document.getElementById("imageFormat");
+
+	const editor = new CodeMirror.EditorView({
+		parent: document.getElementById("editor"),
+		doc: "// 在这里编写绘图代码",
+		extensions: [
+			CodeMirror.basicSetup,
+			javascript(),
+		]
+	});
+
+	function openProgramFile(file) {
+				// const input = document.createElement("input");
+				// input.type = "file";
+				// input.accept = ".js";
+				// input.click();
+				// await new Promise((resolve) => {
+				// 	input.onchange = () => resolve();
+				// });
+				// const file = event.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				const code = e.target.result;
+				editor.dispatch({
+					changes: {
+						from: 0,
+						to: editor.state.doc.length,
+						insert: code,
+					}
+				});
+				const widthMatch = code.match(/\/\/\s*width\s*[=:]?\s*(\d+)/);
+				if (widthMatch) {
+					widthInput.value = widthMatch[1];
+				}
+				const heightMatch = code.match(/\/\/\s*height\s*[=:]?\s*(\d+)/);
+				if (heightMatch) {
+					heightInput.value = heightMatch[1];
+				}
+			};
+			reader.readAsText(file);
+		}
+	}
+
+	openButton.addEventListener("click", () => {
+		const input = document.createElement("input");
+		input.type = "file";
+		input.accept = ".js";
+		input.onchange = () => {
+			const file = event.target.files[0];
+			openProgramFile(file);
+		};
+		input.click();
+	});
+
+	drawButton.addEventListener("click", () => {
+		const width = parseInt(widthInput.value, 10);
+		const height = parseInt(heightInput.value, 10);
+		canvas.width = width;
+		canvas.height = height;
+
+		const code = editor.state.doc.toString();
+		const ctx = canvas.getContext("2d");
+
+		try {
+			Function(`"use strict";${code}`)();
+		} catch (error) {
+			alert("绘图代码执行出错: " + error.message);
+		}
+	});
+
+	saveButton.addEventListener("click", () => {
+		const code = editor.state.doc.toString();
+		const blob = new Blob([code], { type: "text/javascript" });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = "program.js";
+		a.click();
+		URL.revokeObjectURL(url);
+	});
+
+	saveImageButton.addEventListener("click", () => {
+		const dataURL = canvas.toDataURL(imageFormatSelect.value);
+		const a = document.createElement("a");
+		a.href = dataURL;
+		a.download = `drawing.${imageFormatSelect.value.split("/")[1]}`;
+		a.click();
+	});
+
+	window.addEventListener("drop", (event) => {
+		event.preventDefault();
+		const file = event.dataTransfer.files[0];
+		openProgramFile(file);
+	});
+</script>

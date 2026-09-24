@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
-pre, code {
+pre, code, textarea {
     font-family: $code-font-family;
+}
+
+.autosize {
+    width: calc(attr(width px) / var(--pixel-ratio));
+    height: calc(attr(height px) / var(--pixel-ratio));
 }

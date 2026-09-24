@@ -1,15 +1,52 @@
 exclude:
 -   README.md
+-   rollup.config.js
+-   src/
 
 disqus:
     shortname: zhenlige # 占位符，实际使用giscus评论系统
 
-timezone: Asia/Shanghai
-lang: zh-CN
+collections:
+    posts:
+        output: true
+        permalink: /blog/:year-:month-:day/:title
+    drafts:
+        output: true
+        permalink: /blog/draft/:title
+
+defaults:
+-   scope:
+        path: ""
+        type: posts
+    values:
+        layout: post
+-   scope:
+        path: ""
+        type: drafts
+    values:
+        layout: post
+        comments: false
+
+plugins:
+-   jekyll-archives
+
+jekyll-archives:
+    enabled:
+        - categories
+        - tags
+    layouts:
+        category: archives
+        tag: archives
+    permalinks:
+        category: /blog/category/:name/
+        tag: /blog/tag/:name/
 
 theme: minima
 minima:
     skin: auto
+
+timezone: Asia/Shanghai
+lang: zh-CN
 
 author: 真理哥
 title: 真理哥的博客

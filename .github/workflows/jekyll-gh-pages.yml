@@ -29,31 +29,31 @@ jobs:
         -   name: Checkout
             uses: actions/checkout@v7
             with:
-                fetch-depth: 0 # Shallow clones should be disabled for a better experience with the Jekyll build action
+                # fetch-depth: 0 # Shallow clones should be disabled for a better experience with the Jekyll build action
         -   name: Setup Pages
             uses: actions/configure-pages@v6
-        -   name: Debug - List repository files
-            run: |
-                echo "=== 仓库根目录文件 ==="
-                ls -la
-                echo ""
-                echo "=== _includes 目录 ==="
-                ls -la _includes/ 2>&1 || echo "_includes/ 不存在"
-                echo ""
-                echo "=== _layouts 目录 ==="
-                ls -la _layouts/ 2>&1 || echo "_layouts/ 不存在"
-                echo ""
-                echo "=== _sass 目录 ==="
-                ls -la _sass/ 2>&1 || echo "_sass/ 不存在"
-                echo ""
-                echo "=== assets 目录 ==="
-                find assets/ -type f 2>&1 || echo "assets/ 不存在"
-                echo ""
-                echo "=== _config.yml 内容 ==="
-                cat _config.yml
-                echo ""
-                echo "=== 所有文件和目录 ==="
-                find . -maxdepth 3 -not -path './.git/*' -not -path './_site/*' | sort
+        # -   name: Debug - List repository files
+        #     run: |
+        #         echo "=== 仓库根目录文件 ==="
+        #         ls -la
+        #         echo ""
+        #         echo "=== _includes 目录 ==="
+        #         ls -la _includes/ 2>&1 || echo "_includes/ 不存在"
+        #         echo ""
+        #         echo "=== _layouts 目录 ==="
+        #         ls -la _layouts/ 2>&1 || echo "_layouts/ 不存在"
+        #         echo ""
+        #         echo "=== _sass 目录 ==="
+        #         ls -la _sass/ 2>&1 || echo "_sass/ 不存在"
+        #         echo ""
+        #         echo "=== assets 目录 ==="
+        #         find assets/ -type f 2>&1 || echo "assets/ 不存在"
+        #         echo ""
+        #         echo "=== _config.yml 内容 ==="
+        #         cat _config.yml
+        #         echo ""
+        #         echo "=== 所有文件和目录 ==="
+        #         find . -maxdepth 3 -not -path './.git/*' -not -path './_site/*' | sort
         -   name: Build with Jekyll
             uses: actions/jekyll-build-pages@v1
             with:
