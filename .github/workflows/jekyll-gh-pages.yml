@@ -28,8 +28,8 @@ jobs:
         steps:
         -   name: Checkout
             uses: actions/checkout@v7
-            with:
-                # fetch-depth: 0 # Shallow clones should be disabled for a better experience with the Jekyll build action
+            # with:
+            #     fetch-depth: 0 # Shallow clones should be disabled for a better experience with the Jekyll build action
         -   name: Setup Pages
             uses: actions/configure-pages@v6
         # -   name: Debug - List repository files
