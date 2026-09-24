@@ -13475,12 +13475,12 @@ determine their precedence (the ones specified early or with high
 priority get checked first). When a handler has returned `true`
 for a given key, no further handlers are called.
 */
-const keymap$1 = /*@__PURE__*/Facet.define({ enables: handleKeyEvents });
+const keymap = /*@__PURE__*/Facet.define({ enables: handleKeyEvents });
 const Keymaps = /*@__PURE__*/new WeakMap();
 // This is hidden behind an indirection, rather than directly computed
 // by the facet, to keep internal types out of the facet's type.
 function getKeymap(state) {
-    let bindings = state.facet(keymap$1);
+    let bindings = state.facet(keymap);
     let map = Keymaps.get(bindings);
     if (!map)
         Keymaps.set(bindings, map = buildKeymap(bindings.reduce((a, b) => a.concat(b), [])));
@@ -24972,7 +24972,7 @@ to [`clearSnippet`](https://codemirror.net/6/docs/ref/#autocomplete.clearSnippet
 const snippetKeymap = /*@__PURE__*/Facet.define({
     combine(maps) { return maps.length ? maps[0] : defaultSnippetKeymap; }
 });
-const addSnippetKeymap = /*@__PURE__*/Prec.highest(/*@__PURE__*/keymap$1.compute([snippetKeymap], state => state.facet(snippetKeymap)));
+const addSnippetKeymap = /*@__PURE__*/Prec.highest(/*@__PURE__*/keymap.compute([snippetKeymap], state => state.facet(snippetKeymap)));
 /**
 Create a completion from a snippet. Returns an object with the
 properties from `completion`, plus an `apply` function that
@@ -25279,7 +25279,7 @@ const completionKeymap = [
     { key: "PageUp", run: /*@__PURE__*/moveCompletionSelection(false, "page") },
     { key: "Enter", run: acceptCompletion }
 ];
-const completionKeymapExt = /*@__PURE__*/Prec.highest(/*@__PURE__*/keymap$1.computeN([completionConfig], state => state.facet(completionConfig).defaultKeymap ? [completionKeymap] : []));
+const completionKeymapExt = /*@__PURE__*/Prec.highest(/*@__PURE__*/keymap.computeN([completionConfig], state => state.facet(completionConfig).defaultKeymap ? [completionKeymap] : []));
 
 class SelectedDiagnostic {
     constructor(from, to, diagnostic) {
@@ -25974,7 +25974,7 @@ const basicSetup = /*@__PURE__*/(() => [
     crosshairCursor(),
     highlightActiveLine(),
     highlightSelectionMatches(),
-    keymap$1.of([
+    keymap.of([
         ...closeBracketsKeymap,
         ...defaultKeymap,
         ...searchKeymap,
@@ -28404,4 +28404,4 @@ const setup = [
 	keymap.of(indentWithTab),
 ];
 
-export { EditorView, keymap$1 as keymap, setup };
+export { EditorView, setup };

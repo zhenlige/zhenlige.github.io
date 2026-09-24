@@ -1,4 +1,5 @@
-export {EditorView, keymap} from "@codemirror/view";
+export {EditorView} from "@codemirror/view";
+import {keymap} from "@codemirror/view";
 import {basicSetup} from "codemirror";
 import {javascript} from "@codemirror/lang-javascript";
 import {indentUnit} from "@codemirror/language";
