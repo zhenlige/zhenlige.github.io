@@ -14,7 +14,7 @@ export default [
         input: 'src/lang_js.mjs',
         output: {
             dir: 'assets',
-            name: 'javascript',
+            name: '{CodeMirror, javascript}',
             format: 'iife',
         },
         plugins: [nodeResolve()],
