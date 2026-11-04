@@ -10,4 +10,4 @@ title: 关于&留言
 本站使用Jekyll {{ jekyll.version }}构建。
 
 ## 留言
-{%- include disqus_comments.html -%}
+{% include disqus_comments.html -%}

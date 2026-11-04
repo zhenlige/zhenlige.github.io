@@ -1,0 +1,24 @@
+---
+layout: post
+---
+
+{%- if page.categories.size > 0 -%}
+<div class="archive-links">
+    分类：
+    {%- for category in page.categories -%}
+        <a href="{{ site.baseurl }}/blog/category/{{ category | slugify }}/">{{ category }}</a>
+        {%- unless forloop.last -%}, {% endunless -%}
+    {%- endfor -%}
+</div>
+{%- endif -%}
+{%- if page.tags.size > 0 -%}
+<div class="archive-links">
+    标签：
+    {%- for tag in page.tags -%}
+        <a href="{{ site.baseurl }}/blog/tag/{{ tag | slugify }}/">{{ tag }}</a>
+        {%- unless forloop.last -%}, {% endunless -%}
+    {%- endfor -%}
+</div>
+{%- endif -%}
+
+{{ content }}

@@ -1,4 +1,6 @@
 exclude:
+-   package.json
+-   package-lock.json
 -   README.md
 -   rollup.config.js
 -   src/
@@ -19,6 +21,8 @@ defaults:
         path: ""
     values:
         layout: default
+        license: CC BY-SA 4.0
+        license_url: https://creativecommons.org/licenses/by-sa/4.0/
 -   scope:
         path: ""
         type: pages
@@ -28,16 +32,24 @@ defaults:
         path: ""
         type: posts
     values:
-        layout: post
+        layout: post_custom
 -   scope:
         path: ""
         type: drafts
     values:
-        layout: post
+        layout: post_custom
         comments: false
 
 plugins:
+-   jektex
 -   jekyll-archives
+-   jekyll-feed
+-   jekyll-seo-tag
+-   jekyll-sitemap
+
+jektex:
+    katex_options:
+        output: mathml
 
 jekyll-archives:
     enabled:
@@ -58,5 +70,7 @@ timezone: Asia/Shanghai
 lang: zh-CN
 
 author: 真理哥
+email: 2149292144@qq.com
+
 title: 真理哥的博客
 description: 个人博客/技术/geek/数学/计算机

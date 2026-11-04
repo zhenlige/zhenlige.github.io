@@ -8,3 +8,20 @@ pre, code, textarea {
     width: calc(attr(width px) / var(--pixel-ratio));
     height: calc(attr(height px) / var(--pixel-ratio));
 }
+
+.archive-links {
+    font-size: 0.875em;
+    margin-block-end: 1em;
+    color: $grey-color;
+}
+
+.footer-col-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    gap: 15px;
+    > .footer-col {
+        flex: auto;
+        padding: 0;
+    }
+}

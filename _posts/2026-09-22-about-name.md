@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 关于我的网名
 category: 个人
 ---
